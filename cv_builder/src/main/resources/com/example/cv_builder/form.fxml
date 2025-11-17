@@ -3,73 +3,98 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane prefHeight="1101.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane prefHeight="695.0" prefWidth="572.0"
+          xmlns="http://javafx.com/javafx/25"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.example.cv_builder.FormController">
+
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="658.0" minWidth="10.0" prefWidth="159.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="548.0" minWidth="7.0" prefWidth="413.0" />
     </columnConstraints>
+
     <rowConstraints>
-        <RowConstraints maxHeight="166.0" minHeight="10.0" percentHeight="7.5" prefHeight="166.0" vgrow="ALWAYS" />
-        <RowConstraints maxHeight="255.0" minHeight="-Infinity" percentHeight="7.5" prefHeight="0.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="388.0" minHeight="-Infinity" percentHeight="7.5" prefHeight="82.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="489.0" minHeight="6.0" percentHeight="15.0" prefHeight="84.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="909.0" minHeight="10.0" percentHeight="15.0" prefHeight="256.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="1340.0" minHeight="10.0" percentHeight="15.0" prefHeight="61.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="1340.0" minHeight="10.0" percentHeight="15.0" prefHeight="146.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="1340.0" minHeight="10.0" percentHeight="15.0" prefHeight="20.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="166.0" minHeight="10.0" percentHeight="12.5" prefHeight="40.0" vgrow="ALWAYS" />
+        <RowConstraints maxHeight="255.0" minHeight="10.0" percentHeight="12.5" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="388.0" minHeight="10.0" percentHeight="12.5" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="489.0" minHeight="10.0" percentHeight="12.5" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="909.0" minHeight="10.0" percentHeight="12.5" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1340.0" minHeight="10.0" percentHeight="12.5" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1340.0" minHeight="10.0" percentHeight="12.5" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1340.0" minHeight="10.0" percentHeight="12.5" prefHeight="40.0" vgrow="SOMETIMES" />
     </rowConstraints>
+
     <children>
-        <TextField prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <Label text="Full Name" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <TextField fx:id="fullName" prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </TextField>
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Phone Number" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Address" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <TextField prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+
+        <Label text="Email Address" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <TextField fx:id="email" prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </TextField>
-        <TextField prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+
+        <Label text="Phone Number" GridPane.rowIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <TextField fx:id="phone" prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </TextField>
-        <TextField prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+
+        <Label text="Address" GridPane.rowIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <TextField fx:id="address" prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </TextField>
-        <TextField prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+
+        <Label text="Educational Qualification" GridPane.rowIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <TextField fx:id="education" prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </TextField>
-        <TextField prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+
+        <Label text="Skills" GridPane.rowIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <TextField fx:id="skills" prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </TextField>
-        <TextField prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+
+        <Label text="Work Experience" GridPane.rowIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <TextField fx:id="experience" prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </TextField>
-        <TextField prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1">
+
+        <Label text="Projects" GridPane.rowIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <TextField fx:id="projects" prefHeight="25.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </TextField>
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Educational Qualification" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Email Address" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Skills" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Work Experience" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Projects" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Full Name" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+
+        <Button text="Submit"
+                GridPane.columnIndex="1"
+                GridPane.rowIndex="7"
+                GridPane.halignment="RIGHT"
+                onAction="#handleSubmit">
+            <GridPane.margin>
+                <Insets right="40.0" top="40.0" />
+            </GridPane.margin>
+        </Button>
+
     </children>
 </GridPane>
