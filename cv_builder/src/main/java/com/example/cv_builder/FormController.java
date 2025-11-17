@@ -71,7 +71,7 @@ public class FormController {
                     projectsVal
             );
 
-//            HelloApplication.showPreview(data);
+            HelloApplication.showPreview(data);
         } catch (Exception e) {
             e.printStackTrace();
         }

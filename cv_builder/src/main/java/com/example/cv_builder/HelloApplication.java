@@ -13,8 +13,8 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(loader.load(), 600, 400);
 
         stage.setTitle("CV Builder");
         stage.setScene(scene);
@@ -24,6 +24,16 @@ public class HelloApplication extends Application {
     public static void changeScene(String fxmlFile) throws Exception {
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(fxmlFile));
         Scene scene = new Scene(loader.load(), 600, 400);
+        primaryStage.setScene(scene);
+    }
+
+    public static void showPreview(CVData data) throws Exception {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("preview.fxml"));
+        Scene scene = new Scene(loader.load(), 600, 400);
+
+        PreviewController controller = loader.getController();
+        controller.setData(data);
+
         primaryStage.setScene(scene);
     }
 
