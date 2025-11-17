@@ -73,6 +73,12 @@ public class FormController {
             );
 
             HelloApplication.showPreview(data);
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Success!");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("CV data submitted successfully and preview is ready.");
+            successAlert.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }

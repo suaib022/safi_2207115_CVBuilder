@@ -130,7 +130,7 @@
                     <VBox.margin>
                         <Insets bottom="15.0" left="0.0" right="0.0" top="25.0" />
                     </VBox.margin>
-                    <Button onAction="#handleSubmit" style="-fx-cursor: hand; -fx-font-size: 14px; -fx-padding: 8 20 8 20; -fx-background-color: #008080; -fx-text-fill: white;" text="Submit" textAlignment="JUSTIFY" textFill="WHITE">
+                    <Button onAction="#handleSubmit" style="-fx-cursor: hand;-fx-font-size: 14px; -fx-padding: 8 20 8 20; -fx-background-color: #008080; -fx-text-fill: white; -fx-background-radius: 30; -fx-font-weight: bold;" text="Generate CV" textAlignment="JUSTIFY" textFill="WHITE">
                   <font>
                      <Font name="Bell MT" size="12.0" />
                   </font></Button>
