@@ -2,6 +2,7 @@ package com.example.cv_builder;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class FormController {
@@ -16,19 +17,19 @@ public class FormController {
     private TextField phone;
 
     @FXML
-    private TextField address;
+    private TextArea address;
 
     @FXML
-    private TextField education;
+    private TextArea education;
 
     @FXML
-    private TextField skills;
+    private TextArea skills;
 
     @FXML
-    private TextField experience;
+    private TextArea experience;
 
     @FXML
-    private TextField projects;
+    private TextArea projects;
 
     @FXML
     private void handleSubmit() {

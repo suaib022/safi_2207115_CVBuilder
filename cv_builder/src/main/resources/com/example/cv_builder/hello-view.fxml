@@ -15,7 +15,8 @@
            style="-fx-font-size: 28px; -fx-font-weight: bold;" />
 
     <Button text="Create New CV"
-            style="-fx-font-size: 18px; -fx-padding: 10 20;"
+            style="-fx-font-size: 18px; -fx-padding: 10 20; -fx-cursor: hand;"
+
             onAction="#handleNavigateToCreateCV" />
 
 </VBox>

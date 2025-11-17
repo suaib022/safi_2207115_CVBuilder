@@ -1,27 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.cv_builder.PreviewController"
-      spacing="10"
-      style="-fx-background-color: #ffffff; -fx-padding: 20;">
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" stylesheets="@styles.css" vbarPolicy="AS_NEEDED" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cv_builder.PreviewController">
 
-    <Label text="CV Preview"
-           style="-fx-font-size: 20; -fx-font-weight: bold;" />
+    <content>
 
-    <Label fx:id="name" />
-    <Label fx:id="email" />
-    <Label fx:id="phone" />
-    <Label fx:id="address" />
-    <Label fx:id="education" />
-    <Label fx:id="skills" />
-    <Label fx:id="experiences" />
-    <Label fx:id="projects" />
+        <StackPane alignment="CENTER" styleClass="preview-wrapper">
 
-    <Button text="Back to Form" onAction="#handleBack" />
 
-</VBox>
+            <HBox spacing="0" styleClass="cv-root">
+
+
+                <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="200.0" styleClass="sidebar">
+                    <VBox alignment="CENTER" spacing="15" />
+
+                    <VBox spacing="10" styleClass="sidebar-block">
+                        <Label styleClass="sidebar-heading" text="SKILLS" />
+                        <Separator styleClass="sidebar-separator" />
+                        <Label fx:id="skills" styleClass="sidebar-text" wrapText="true" />
+                    </VBox>
+
+                    <Region VBox.vgrow="ALWAYS" />
+                </VBox>
+
+
+                <Region prefWidth="8" styleClass="vertical-divider" />
+
+
+                <VBox minWidth="350.0" spacing="32" styleClass="content-area">
+                    <VBox.margin>
+                        <Insets bottom="40" left="60" right="60" top="40" />
+                    </VBox.margin>
+
+
+                    <VBox spacing="18">
+                        <Label fx:id="name" styleClass="name-heading" text="Ahmed Safi" />
+
+                        <VBox spacing="6" styleClass="contact-info">
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label styleClass="contact-icon" text="☎" />
+                                <Label fx:id="phone" styleClass="contact-text" text="+8801867271008" />
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label styleClass="contact-icon" text="✉" />
+                                <Label fx:id="email" styleClass="contact-text" text="ssa222158@gmail.com" />
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label styleClass="contact-icon" text="⌖" />
+                                <Label fx:id="address" styleClass="contact-text" text="Khulna, Bangladesh" />
+                            </HBox>
+                        </VBox>
+
+                        <Separator styleClass="header-separator" />
+                    </VBox>
+
+
+                    <VBox spacing="10" styleClass="section">
+                        <Label styleClass="section-heading" text="EXPERIENCE" />
+                        <Label fx:id="experiences" styleClass="section-body" wrapText="true" />
+                    </VBox>
+
+
+                    <VBox spacing="10" styleClass="section">
+                        <Label styleClass="section-heading" text="EDUCATION" />
+                        <Label fx:id="education" styleClass="section-body" wrapText="true" />
+                    </VBox>
+
+                    <VBox spacing="10" styleClass="section">
+                        <Label styleClass="section-heading" text="PROJECTS" />
+                        <Label fx:id="projects" styleClass="section-body" wrapText="true" />
+                    </VBox>
+
+                    <HBox alignment="CENTER">
+                        <Button onAction="#handleBack" styleClass="back-button" style="-fx-cursor: hand;" text="← Back to Form" />
+                    </HBox>
+
+                    <Region VBox.vgrow="ALWAYS" />
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+
+            </HBox>
+        </StackPane>
+    </content>
+</ScrollPane>
