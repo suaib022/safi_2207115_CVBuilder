@@ -110,4 +110,36 @@ public class DatabaseHandler {
         }
         return cv;
     }
+    public static void updateCV(CVData data) throws SQLException {
+        String sql = "UPDATE cv_data SET full_name = ?, email = ?, phone = ?, address = ?, education = ?, skills = ?, experience = ?, projects = ?, image_path = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, data.getFullName());
+            pstmt.setString(2, data.getEmail());
+            pstmt.setString(3, data.getPhone());
+            pstmt.setString(4, data.getAddress());
+            pstmt.setString(5, data.getEducation());
+            pstmt.setString(6, data.getSkills());
+            pstmt.setString(7, data.getExperience());
+            pstmt.setString(8, data.getProjects());
+            pstmt.setString(9, data.getImagePath());
+            pstmt.setInt(10, data.getId());
+            pstmt.executeUpdate();
+            System.out.println("CV updated successfully.");
+        }
+    }
+
+    public static void deleteCV(int id) {
+        String sql = "DELETE FROM cv_data WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            System.out.println("CV deleted successfully.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

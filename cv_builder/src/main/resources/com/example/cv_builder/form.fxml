@@ -15,10 +15,15 @@
     <content>
         <StackPane styleClass="form-container">
             <VBox styleClass="form-card">
-                <VBox styleClass="form-header">
-                    <Label styleClass="form-title" text="CV Builder" />
-                    <Label styleClass="form-subtitle" text="Fill in your information to generate your CV" />
-                </VBox>
+                <StackPane styleClass="form-header">
+                    <HBox alignment="CENTER_LEFT" pickOnBounds="false">
+                        <Button onAction="#handleBackHome" styleClass="secondary-button" text="← Back Home" />
+                    </HBox>
+                    <VBox alignment="CENTER" mouseTransparent="true" pickOnBounds="false">
+                        <Label styleClass="form-title" text="CV Builder" />
+                        <Label styleClass="form-subtitle" text="Fill in your information to generate your CV" />
+                    </VBox>
+                </StackPane>
 
                 <VBox spacing="15">
                     <Label styleClass="section-title" text="Personal Information" />
@@ -83,7 +88,7 @@
                 </VBox>
 
                 <HBox styleClass="action-bar">
-                    <Button onAction="#handleSubmit" styleClass="primary-button" text="Generate CV" />
+                    <Button fx:id="submitButton" onAction="#handleSubmit" styleClass="primary-button" text="Generate CV" />
                 </HBox>
 
             </VBox>

@@ -19,6 +19,8 @@ public class CVDetailsController {
 
     @FXML private ImageView profileImage;
 
+    private CVData currentCV;
+
     public void initData(int id) {
         CVData data = DatabaseHandler.getCVById(id);
         if (data != null) {
@@ -27,6 +29,7 @@ public class CVDetailsController {
     }
 
     public void setData(CVData cvData) {
+        this.currentCV = cvData;
         name.setText(cvData.getFullName());
         email.setText(cvData.getEmail());
         phone.setText(cvData.getPhone());
@@ -54,6 +57,26 @@ public class CVDetailsController {
     private void handleBack() {
         try {
             HelloApplication.changeScene("cv-list-view.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleEdit() {
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(HelloApplication.class.getResource("form.fxml"));
+            javafx.scene.Parent root = loader.load();
+            
+            FormController controller = loader.getController();
+            // We need to pass the current CV data to the form
+            // Since we don't store the full CVData object in a field, we might need to fetch it again or store it.
+            // Let's store it in a field when setData is called.
+            if (currentCV != null) {
+                controller.setCVData(currentCV);
+            }
+            
+            HelloApplication.changeScene(root);
         } catch (Exception e) {
             e.printStackTrace();
         }

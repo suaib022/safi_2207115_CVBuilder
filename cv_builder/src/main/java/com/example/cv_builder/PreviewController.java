@@ -54,7 +54,16 @@ public class PreviewController {
     @FXML
     private void handleBack() {
         try {
-            HelloApplication.changeScene("form.fxml");
+            HelloApplication.changeScene("hello-view.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleViewAll() {
+        try {
+            HelloApplication.changeScene("cv-list-view.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }

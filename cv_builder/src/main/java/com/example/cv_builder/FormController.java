@@ -54,6 +54,44 @@ public class FormController {
     }
 
     @FXML
+    private javafx.scene.control.Button submitButton;
+
+    private CVData currentCV;
+    private boolean isEditMode = false;
+
+    public void setCVData(CVData data) {
+        this.currentCV = data;
+        this.isEditMode = true;
+        
+        fullName.setText(data.getFullName());
+        email.setText(data.getEmail());
+        phone.setText(data.getPhone());
+        address.setText(data.getAddress());
+        education.setText(data.getEducation());
+        skills.setText(data.getSkills());
+        experience.setText(data.getExperience());
+        projects.setText(data.getProjects());
+        
+        if (data.getImagePath() != null) {
+            selectedImagePath = data.getImagePath();
+            imagePathLabel.setText(new File(data.getImagePath()).getName());
+        }
+        
+        if (submitButton != null) {
+            submitButton.setText("Update");
+        }
+    }
+
+    @FXML
+    private void handleBackHome() {
+        try {
+            HelloApplication.changeScene("hello-view.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     protected void handleSubmit() {
         if (fullName.getText().isEmpty() || email.getText().isEmpty() || phone.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -64,7 +102,10 @@ public class FormController {
             return;
         }
 
-        CVData data = new CVData(
+        CVData data;
+        if (isEditMode) {
+             data = new CVData(
+                currentCV.getId(), // Keep existing ID
                 fullName.getText(),
                 email.getText(),
                 phone.getText(),
@@ -74,12 +115,29 @@ public class FormController {
                 experience.getText(),
                 projects.getText(),
                 selectedImagePath
-        );
+            );
+        } else {
+             data = new CVData(
+                fullName.getText(),
+                email.getText(),
+                phone.getText(),
+                address.getText(),
+                education.getText(),
+                skills.getText(),
+                experience.getText(),
+                projects.getText(),
+                selectedImagePath
+            );
+        }
 
         // Save to Database
         DatabaseHandler.createTable(); // Ensure table exists
         try {
-            DatabaseHandler.insertCV(data);
+            if (isEditMode) {
+                DatabaseHandler.updateCV(data);
+            } else {
+                DatabaseHandler.insertCV(data);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -97,7 +155,11 @@ public class FormController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);
-            alert.setContentText("Your CV has been stored succesfully");
+            if (isEditMode) {
+                alert.setContentText("CV updated successfully");
+            } else {
+                alert.setContentText("Your CV has been stored succesfully");
+            }
             alert.showAndWait();
             
         } catch (Exception e) {

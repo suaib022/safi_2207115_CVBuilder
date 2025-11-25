@@ -24,6 +24,7 @@
             <TableColumn fx:id="nameColumn" text="Full Name" prefWidth="250" />
             <TableColumn fx:id="emailColumn" text="Email" prefWidth="250" />
             <TableColumn fx:id="actionColumn" text="" prefWidth="100" />
+            <TableColumn fx:id="deleteColumn" text="" prefWidth="100" />
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
