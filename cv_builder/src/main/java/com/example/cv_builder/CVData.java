@@ -7,11 +7,11 @@ public class CVData {
     private String address;
     private String education;
     private String skills;
-    private String experience;
-    private String projects;
+    private final String experience;
+    private final String projects;
+    private final String imagePath;
 
-    public CVData(String fullName, String email, String phone, String address,
-                  String education, String skills, String experience, String projects) {
+    public CVData(String fullName, String email, String phone, String address, String education, String skills, String experience, String projects, String imagePath) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
@@ -20,6 +20,7 @@ public class CVData {
         this.skills = skills;
         this.experience = experience;
         this.projects = projects;
+        this.imagePath = imagePath;
     }
 
     public String getFullName() { return fullName; }
@@ -30,4 +31,5 @@ public class CVData {
     public String getSkills() { return skills; }
     public String getExperience() { return experience; }
     public String getProjects() { return projects; }
+    public String getImagePath() { return imagePath; }
 }

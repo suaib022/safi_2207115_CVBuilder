@@ -11,6 +11,8 @@ module com.example.cv_builder {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires java.sql;
+    requires org.xerial.sqlitejdbc;
 
     opens com.example.cv_builder to javafx.fxml;
     exports com.example.cv_builder;

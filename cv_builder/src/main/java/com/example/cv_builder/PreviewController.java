@@ -2,9 +2,9 @@ package com.example.cv_builder;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import javax.swing.*;
 
 public class PreviewController {
 
@@ -18,6 +18,9 @@ public class PreviewController {
     @FXML private Label experiences;
     @FXML private Label projects;
 
+    @FXML
+    private ImageView profileImage;
+
     public void setData(CVData data) {
 
         name.setText(data.getFullName());
@@ -28,12 +31,24 @@ public class PreviewController {
         skills.setText(data.getSkills());
         experiences.setText(data.getExperience());
         projects.setText(data.getProjects());
-    }
 
-    private void addTextToBox(VBox box, String text) {
-        Label label = new Label(text);
-        label.setWrapText(true);
-        box.getChildren().add(label);
+        if (data.getImagePath() != null && !data.getImagePath().isEmpty()) {
+            try {
+                profileImage.setImage(new Image(data.getImagePath()));
+                
+                // Make image rounded
+                double radius = Math.min(profileImage.getFitWidth(), profileImage.getFitHeight()) / 2;
+                javafx.scene.shape.Circle clip = new javafx.scene.shape.Circle(
+                    profileImage.getFitWidth() / 2,
+                    profileImage.getFitHeight() / 2,
+                    radius
+                );
+                profileImage.setClip(clip);
+                
+            } catch (Exception e) {
+                System.out.println("Error loading image: " + e.getMessage());
+            }
+        }
     }
 
     @FXML

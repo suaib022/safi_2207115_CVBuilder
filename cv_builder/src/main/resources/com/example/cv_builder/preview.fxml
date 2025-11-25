@@ -9,23 +9,24 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" stylesheets="@styles.css" vbarPolicy="AS_NEEDED" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cv_builder.PreviewController">
+<ScrollPane fitToHeight="false" fitToWidth="true" hbarPolicy="AS_NEEDED" styleClass="preview-scroll-pane" stylesheets="@styles.css" vbarPolicy="AS_NEEDED" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cv_builder.PreviewController">
 
     <content>
 
         <StackPane alignment="CENTER" styleClass="preview-wrapper">
 
-
             <HBox spacing="0" styleClass="cv-root">
 
-
-                <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="200.0" styleClass="sidebar">
-                    <VBox alignment="CENTER" spacing="15" />
+                <VBox maxWidth="-Infinity" minWidth="-Infinity" styleClass="sidebar" VBox.vgrow="ALWAYS">
+                    <VBox alignment="CENTER" spacing="15">
+                         <ImageView fx:id="profileImage" fitWidth="150" fitHeight="150" preserveRatio="true" styleClass="profile-image" />
+                    </VBox>
 
                     <VBox spacing="10" styleClass="sidebar-block">
                         <Label styleClass="sidebar-heading" text="SKILLS" />
-                        <Separator styleClass="sidebar-separator" />
+                        <!-- Separator removed as requested -->
                         <Label fx:id="skills" styleClass="sidebar-text" wrapText="true" />
                     </VBox>
 
@@ -36,7 +37,7 @@
                 <Region prefWidth="8" styleClass="vertical-divider" />
 
 
-                <VBox minWidth="350.0" spacing="32" styleClass="content-area">
+                <VBox minWidth="350.0" spacing="32" styleClass="content-area" HBox.hgrow="ALWAYS">
                     <VBox.margin>
                         <Insets bottom="40" left="60" right="60" top="40" />
                     </VBox.margin>
@@ -45,16 +46,16 @@
                     <VBox spacing="18">
                         <Label fx:id="name" styleClass="name-heading" text="Ahmed Safi" />
 
-                        <VBox spacing="6" styleClass="contact-info">
-                            <HBox alignment="CENTER_LEFT" spacing="12">
+                        <VBox styleClass="contact-info">
+                            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="contact-row">
                                 <Label styleClass="contact-icon" text="☎" />
                                 <Label fx:id="phone" styleClass="contact-text" text="+8801867271008" />
                             </HBox>
-                            <HBox alignment="CENTER_LEFT" spacing="12">
+                            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="contact-row">
                                 <Label styleClass="contact-icon" text="✉" />
                                 <Label fx:id="email" styleClass="contact-text" text="ssa222158@gmail.com" />
                             </HBox>
-                            <HBox alignment="CENTER_LEFT" spacing="12">
+                            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="contact-row">
                                 <Label styleClass="contact-icon" text="⌖" />
                                 <Label fx:id="address" styleClass="contact-text" text="Khulna, Bangladesh" />
                             </HBox>
@@ -80,17 +81,19 @@
                         <Label fx:id="projects" styleClass="section-body" wrapText="true" />
                     </VBox>
 
-                    <HBox alignment="CENTER">
-                        <Button onAction="#handleBack" styleClass="back-button" style="-fx-cursor: hand;" text="← Back to Form" />
+                    <Region VBox.vgrow="ALWAYS" />
+
+                    <HBox alignment="BOTTOM_RIGHT">
+                        <Button onAction="#handleBack" styleClass="back-button" text="← Back to Form" />
                     </HBox>
 
-                    <Region VBox.vgrow="ALWAYS" />
                     <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                     </padding>
                 </VBox>
 
             </HBox>
+            
         </StackPane>
     </content>
 </ScrollPane>
