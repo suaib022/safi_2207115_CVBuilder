@@ -51,4 +51,63 @@ public class DatabaseHandler {
             System.out.println("CV inserted successfully.");
         }
     }
+
+    public static java.util.List<CVData> getAllCVs() {
+        java.util.List<CVData> cvList = new java.util.ArrayList<>();
+        String sql = "SELECT * FROM cv_data";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             java.sql.ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                CVData cv = new CVData(
+                    rs.getInt("id"),
+                    rs.getString("full_name"),
+                    rs.getString("email"),
+                    rs.getString("phone"),
+                    rs.getString("address"),
+                    rs.getString("education"),
+                    rs.getString("skills"),
+                    rs.getString("experience"),
+                    rs.getString("projects"),
+                    rs.getString("image_path")
+                );
+                cvList.add(cv);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return cvList;
+    }
+
+    public static CVData getCVById(int id) {
+        String sql = "SELECT * FROM cv_data WHERE id = ?";
+        CVData cv = null;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, id);
+            try (java.sql.ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    cv = new CVData(
+                        rs.getInt("id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("education"),
+                        rs.getString("skills"),
+                        rs.getString("experience"),
+                        rs.getString("projects"),
+                        rs.getString("image_path")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return cv;
+    }
 }

@@ -41,6 +41,14 @@ public class HelloApplication extends Application {
         primaryStage.setScene(scene);
     }
 
+    public static void changeScene(javafx.scene.Parent root) {
+        double currentWidth = primaryStage.getScene().getWidth();
+        double currentHeight = primaryStage.getScene().getHeight();
+        
+        Scene scene = new Scene(root, currentWidth, currentHeight);
+        primaryStage.setScene(scene);
+    }
+
     public static void showPreview(CVData data) throws Exception {
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("preview.fxml"));
 
