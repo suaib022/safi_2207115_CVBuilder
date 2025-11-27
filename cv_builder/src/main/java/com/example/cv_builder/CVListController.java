@@ -82,9 +82,20 @@ public class CVListController {
     }
 
     private void loadData() {
-        java.util.List<CVData> cvList = DatabaseHandler.getAllCVs();
-        ObservableList<CVData> data = FXCollections.observableArrayList(cvList);
-        cvTable.setItems(data);
+        java.util.concurrent.CompletableFuture.supplyAsync(() -> DatabaseHandler.getAllCVs())
+            .thenAccept(cvList -> {
+                javafx.application.Platform.runLater(() -> {
+                    ObservableList<CVData> data = FXCollections.observableArrayList(cvList);
+                    cvTable.setItems(data);
+                });
+            })
+            .exceptionally(ex -> {
+                javafx.application.Platform.runLater(() -> {
+                    ex.printStackTrace();
+                    // Optional: Show error alert
+                });
+                return null;
+            });
     }
 
     private void addButtonsToTable() {
@@ -157,14 +168,29 @@ public class CVListController {
 
         java.util.Optional<javafx.scene.control.ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == javafx.scene.control.ButtonType.OK) {
-            DatabaseHandler.deleteCV(data.getId());
-            loadData(); // Refresh table
-            
-            javafx.scene.control.Alert successAlert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Success");
-            successAlert.setHeaderText(null);
-            successAlert.setContentText("CV deleted successfully.");
-            successAlert.showAndWait();
+            java.util.concurrent.CompletableFuture.runAsync(() -> DatabaseHandler.deleteCV(data.getId()))
+                .thenRun(() -> {
+                    javafx.application.Platform.runLater(() -> {
+                        loadData(); // Refresh table
+                        
+                        javafx.scene.control.Alert successAlert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+                        successAlert.setTitle("Success");
+                        successAlert.setHeaderText(null);
+                        successAlert.setContentText("CV deleted successfully.");
+                        successAlert.showAndWait();
+                    });
+                })
+                .exceptionally(ex -> {
+                    javafx.application.Platform.runLater(() -> {
+                        ex.printStackTrace();
+                        javafx.scene.control.Alert errorAlert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+                        errorAlert.setTitle("Error");
+                        errorAlert.setHeaderText("Delete Failed");
+                        errorAlert.setContentText("Could not delete CV: " + ex.getMessage());
+                        errorAlert.showAndWait();
+                    });
+                    return null;
+                });
         }
     }
 

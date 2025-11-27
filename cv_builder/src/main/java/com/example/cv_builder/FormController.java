@@ -132,43 +132,52 @@ public class FormController {
 
         // Save to Database
         DatabaseHandler.createTable(); // Ensure table exists
-        try {
-            if (isEditMode) {
-                DatabaseHandler.updateCV(data);
-            } else {
-                DatabaseHandler.insertCV(data);
+        
+        java.util.concurrent.CompletableFuture.runAsync(() -> {
+            try {
+                if (isEditMode) {
+                    DatabaseHandler.updateCV(data);
+                } else {
+                    DatabaseHandler.insertCV(data);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Failed to save CV to database: " + e.getMessage());
-            alert.showAndWait();
-            return; // Stop if DB save fails
-        }
-
-        try {
-            HelloApplication.showPreview(data);
-            
-            // Show Success Alert AFTER successful navigation
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            if (isEditMode) {
-                alert.setContentText("CV updated successfully");
-            } else {
-                alert.setContentText("Your CV has been stored succesfully");
-            }
-            alert.showAndWait();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("Navigation Error");
-            errorAlert.setContentText("Could not load preview page: " + e.getMessage());
-            errorAlert.showAndWait();
-        }
+        }).thenRun(() -> {
+            javafx.application.Platform.runLater(() -> {
+                try {
+                    HelloApplication.showPreview(data);
+                    
+                    // Show Success Alert AFTER successful navigation
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText(null);
+                    if (isEditMode) {
+                        alert.setContentText("CV updated successfully");
+                    } else {
+                        alert.setContentText("Your CV has been stored succesfully");
+                    }
+                    alert.showAndWait();
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setTitle("Error");
+                    errorAlert.setHeaderText("Navigation Error");
+                    errorAlert.setContentText("Could not load preview page: " + e.getMessage());
+                    errorAlert.showAndWait();
+                }
+            });
+        }).exceptionally(ex -> {
+            javafx.application.Platform.runLater(() -> {
+                ex.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Database Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to save CV to database: " + ex.getCause().getMessage());
+                alert.showAndWait();
+            });
+            return null;
+        });
     }
 }
